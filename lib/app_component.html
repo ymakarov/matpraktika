@@ -1,0 +1,25 @@
+<h1>Задачки на устный счет</h1>
+<select [(ngModel)]="level" (ngModelChange)="changeLevel()">
+    <option [ngValue]="1">Плюс-минус</option>
+    <option [ngValue]="2">Таблица умножения</option>
+    <option [ngValue]="3">Квадраты чисел</option>
+    <option [ngValue]="4">Сложение 4-х значных</option>
+    <option [ngValue]="5">Умножение 2-х значных</option>
+</select>
+
+<h2>Правильных ответов: <span class="right">{{result.right}}</span></h2>
+<h2>Ошибок: <span class="wrong">{{result.wrong}}</span></h2>
+
+
+<form (submit)="submit();$event.preventDefault()">
+    {{problem.x}} {{problem.op}} {{problem.y}} =
+    <span *ngIf="showAnswer"><strike>{{answer.toInt()}}</strike> <span class="wrong">{{problem.answer()}}</span></span>
+
+    <input [class.hidden]="showAnswer" #answerInput type="number" [(ngModel)]="answer">
+
+    <button (click)="answerInput.focus()">
+        Ok
+    </button>
+
+</form>
+
